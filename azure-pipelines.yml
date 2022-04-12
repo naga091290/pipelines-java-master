@@ -7,20 +7,10 @@ trigger:
 - dependabot/maven/junit-junit-4.13.1
 
 
-- stage: deploy_stage_1
-
-  jobs:
-  - job: deploy_job_1
-
-    strategy:
-      matrix:
-        try2:
-          AGENT_NAME: 'try'
-
-    pool:
+pool:
       name: try2
       demands:
-        - agent.name -equals $(AGENT_NAME)
+        - agent.name -equals 'try'
 
 steps:
 - task: Maven@3
