@@ -6,8 +6,21 @@
 trigger:
 - dependabot/maven/junit-junit-4.13.1
 
-pool:
-  vmImage: ubuntu-latest
+
+- stage: deploy_stage_1
+
+  jobs:
+  - job: deploy_job_1
+
+    strategy:
+      matrix:
+        try2:
+          AGENT_NAME: 'try'
+
+    pool:
+      name: try2
+      demands:
+        - agent.name -equals $(AGENT_NAME)
 
 steps:
 - task: Maven@3
